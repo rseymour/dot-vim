@@ -1,0 +1,64 @@
+http://geek.chrislott.org/2013/managing-vim-plugins-as-git-submodules/
+
+Installing a Plugin as a Submodule
+Basically you want to change to your Vim directory (~/.vim), install the new plugin (in this example, the awesome EasyMotion plugin) as a submodule using its repository URL, commit all those sparkly new files and then push everything to your own repository:
+
+cd ~/.vim
+git submodule add https://github.com/Lokaltog/vim-easymotion.git bundle/easymotion
+git add .
+git commit -m "Installed EasyMotion plugin"
+git push
+Updating a Plugin Installed as a Submodule
+One beautiful thing about using Git to manage plugins is that updating plugins is easy. You can update an individual plugin:
+
+cd ~/.vim/bundle/easymotion
+git pull origin master
+Or you can upgrade all of those that have changed at once:
+
+cd ~/.vim
+git submodule foreach git pull origin master
+Removing a Plugin Installed as a Submodule
+It seems like there should be an easier way to remove a submodule than manually editing files, but I don’t know it. So, to remove a plugin you need to remove the entry for that submodule from:
+
+~/.vim/.gitmodules
+and ~/.vim/.git/config
+
+Then remove the bundle itself and commit your changes:
+
+cd ~/.vim
+git rm --cached bundle/easymotion
+git commit -a "Removing EasyMotion plugin"
+git push
+I keep my entire Vim configuration in as a Git repository in Github (see my configuration). This makes it easy to use my configuration on multiple machines and backtrack if I mess something up. I could accomplish the same task, for the most part, by simply storing the whole shebang somewhere in my Dropbox folder, but that’s not geeky enough, not versatile enough, and doesn’t allow for easy updates of Vim plugins, most of the best of which are regularly changed.
+
+I might post steps to getting started with storing one’s Vim config in Git and Github, but this is really just a post to remind myself of the basics of installing, maintaining and removing plugins as git submodules. Combine this with Pathogen or some other kind of plugin manager and you have a no-fuss, no-muss solution to maintaining your Vim installation.
+
+Installing a Plugin as a Submodule
+Basically you want to change to your Vim directory (~/.vim), install the new plugin (in this example, the awesome EasyMotion plugin) as a submodule using its repository URL, commit all those sparkly new files and then push everything to your own repository:
+
+cd ~/.vim
+git submodule add https://github.com/Lokaltog/vim-easymotion.git bundle/easymotion
+git add .
+git commit -m "Installed EasyMotion plugin"
+git push
+Updating a Plugin Installed as a Submodule
+One beautiful thing about using Git to manage plugins is that updating plugins is easy. You can update an individual plugin:
+
+cd ~/.vim/bundle/easymotion
+git pull origin master
+Or you can upgrade all of those that have changed at once:
+
+cd ~/.vim
+git submodule foreach git pull origin master
+Removing a Plugin Installed as a Submodule
+It seems like there should be an easier way to remove a submodule than manually editing files, but I don’t know it. So, to remove a plugin you need to remove the entry for that submodule from:
+
+~/.vim/.gitmodules
+and ~/.vim/.git/config
+
+Then remove the bundle itself and commit your changes:
+
+cd ~/.vim
+git rm --cached bundle/easymotion
+git commit -a "Removing EasyMotion plugin"
+git push
